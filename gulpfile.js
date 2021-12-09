@@ -4,12 +4,14 @@ const { src, dest, watch, series } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const purgecss = require('gulp-purgecss');
 const rename = require('gulp-rename');
+const plumber = require('gulp-plumber');
 
 // Imagenes
 const imagemin = require('gulp-imagemin');
 
 function css( done ) {
     src('src/scss/app.scss') // Identificar el archivo principal
+        .pipe( plumber() )
         .pipe( sass() ) // Compilar SASS
         .pipe( dest('build/css') ) // Exportarlo o guardarlo en una ubicación
     done();
